@@ -1,0 +1,654 @@
+/*
+ * Sistem Pengajuan dan Persetujuan KRS
+ * CSS ditulis sendiri: latar gading hangat, satu aksen hijau tua,
+ * border 1px, radius kecil, tabel sebagai elemen utama.
+ */
+
+:root {
+    --latar: #f6f5f1;
+    --permukaan: #ffffff;
+    --permukaan-redup: #f0efe9;
+    --garis: #dcdad2;
+    --garis-kuat: #c4c1b6;
+    --teks: #1b1b18;
+    --teks-redup: #6b6a63;
+    --aksen: #1f4d3a;
+    --aksen-gelap: #16372a;
+    --aksen-muda: #e6ede9;
+    --bahaya: #8c3a2b;
+    --bahaya-muda: #f4e7e3;
+    --kuning: #8a6a10;
+    --kuning-muda: #f5eeda;
+    --radius: 3px;
+    --serif: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--latar);
+    color: var(--teks);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+a {
+    color: var(--aksen);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+}
+
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1.05rem; }
+
+p { margin: 0 0 1rem; }
+
+/* ---------- Kerangka ---------- */
+
+.bar-atas {
+    background: var(--permukaan);
+    border-bottom: 1px solid var(--garis);
+}
+
+.bar-atas-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    min-height: 56px;
+}
+
+.merek {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.02rem;
+    color: var(--aksen);
+    letter-spacing: 0.01em;
+    margin-right: auto;
+}
+
+.merek span {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--teks-redup);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.navigasi {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.navigasi a {
+    display: inline-block;
+    padding: 0.35rem 0.7rem;
+    color: var(--teks);
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+}
+
+.navigasi a:hover {
+    background: var(--permukaan-redup);
+    text-decoration: none;
+}
+
+.navigasi a.aktif {
+    background: var(--aksen-muda);
+    border-color: var(--garis);
+    color: var(--aksen);
+    font-weight: 600;
+}
+
+.identitas {
+    font-size: 0.82rem;
+    color: var(--teks-redup);
+    border-left: 1px solid var(--garis);
+    padding-left: 1rem;
+}
+
+.identitas strong {
+    color: var(--teks);
+    font-weight: 600;
+}
+
+.wadah {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 1.75rem 1.25rem 3.5rem;
+}
+
+.kepala-halaman {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+
+.kepala-halaman p {
+    margin: 0;
+    color: var(--teks-redup);
+    font-size: 0.9rem;
+}
+
+/* ---------- Kartu / panel ---------- */
+
+.panel {
+    background: var(--permukaan);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius);
+    margin-bottom: 1.25rem;
+}
+
+.panel-judul {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--garis);
+    background: var(--permukaan-redup);
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.panel-isi {
+    padding: 1rem;
+}
+
+.panel-isi.penuh {
+    padding: 0;
+}
+
+/* ---------- Tabel ---------- */
+
+.tabel-bungkus {
+    overflow-x: auto;
+}
+
+table.tabel {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--permukaan);
+    font-size: 0.9rem;
+}
+
+table.tabel th,
+table.tabel td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--garis);
+    text-align: left;
+    vertical-align: top;
+}
+
+table.tabel th {
+    background: var(--permukaan-redup);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--teks-redup);
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--garis-kuat);
+}
+
+table.tabel tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table.tabel tbody tr:hover td {
+    background: #faf9f6;
+}
+
+table.tabel td.angka,
+table.tabel th.angka {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+table.tabel td.tengah,
+table.tabel th.tengah {
+    text-align: center;
+}
+
+.kosong {
+    padding: 1.75rem 1rem;
+    text-align: center;
+    color: var(--teks-redup);
+    font-size: 0.92rem;
+}
+
+.baris-total td {
+    background: var(--permukaan-redup);
+    font-weight: 600;
+    border-top: 1px solid var(--garis-kuat);
+}
+
+/* ---------- Badge status ---------- */
+
+.badge {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border: 1px solid;
+    border-radius: var(--radius);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.badge-draft {
+    background: #ecebe5;
+    border-color: #cbc9c0;
+    color: #57564f;
+}
+
+.badge-menunggu {
+    background: var(--kuning-muda);
+    border-color: #d9c68a;
+    color: var(--kuning);
+}
+
+.badge-disetujui {
+    background: var(--aksen-muda);
+    border-color: #a9c3b5;
+    color: var(--aksen);
+}
+
+.badge-ditolak {
+    background: var(--bahaya-muda);
+    border-color: #d8b3a9;
+    color: var(--bahaya);
+}
+
+/* ---------- Statistik ringkas ---------- */
+
+.ringkas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.ringkas-item {
+    background: var(--permukaan);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius);
+    padding: 0.85rem 1rem;
+}
+
+.ringkas-item .nilai {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+
+.ringkas-item .label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--teks-redup);
+    margin-top: 0.2rem;
+}
+
+/* ---------- Formulir ---------- */
+
+.formulir-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.form-grup {
+    margin-bottom: 1rem;
+}
+
+.form-grup label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.3rem;
+    color: var(--teks);
+}
+
+.form-grup .bantuan {
+    font-size: 0.78rem;
+    color: var(--teks-redup);
+    margin-top: 0.25rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="time"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid var(--garis-kuat);
+    border-radius: var(--radius);
+    background: var(--permukaan);
+    color: var(--teks);
+    font-family: var(--sans);
+    font-size: 0.92rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--aksen);
+    box-shadow: 0 0 0 2px var(--aksen-muda);
+}
+
+input[readonly] {
+    background: var(--permukaan-redup);
+}
+
+.form-aksi {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--garis);
+}
+
+/* ---------- Tombol ---------- */
+
+.tombol {
+    display: inline-block;
+    padding: 0.45rem 0.95rem;
+    border: 1px solid var(--garis-kuat);
+    border-radius: var(--radius);
+    background: var(--permukaan);
+    color: var(--teks);
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.tombol:hover {
+    background: var(--permukaan-redup);
+    text-decoration: none;
+}
+
+.tombol-utama {
+    background: var(--aksen);
+    border-color: var(--aksen);
+    color: #fff;
+}
+
+.tombol-utama:hover {
+    background: var(--aksen-gelap);
+}
+
+.tombol-bahaya {
+    background: var(--permukaan);
+    border-color: var(--bahaya);
+    color: var(--bahaya);
+}
+
+.tombol-bahaya:hover {
+    background: var(--bahaya-muda);
+}
+
+.tombol-kecil {
+    padding: 0.2rem 0.55rem;
+    font-size: 0.8rem;
+}
+
+.tombol[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* ---------- Pesan ---------- */
+
+.pesan {
+    padding: 0.6rem 0.9rem;
+    border: 1px solid;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.pesan-sukses {
+    background: var(--aksen-muda);
+    border-color: #a9c3b5;
+    color: var(--aksen-gelap);
+}
+
+.pesan-gagal {
+    background: var(--bahaya-muda);
+    border-color: #d8b3a9;
+    color: var(--bahaya);
+}
+
+.pesan ul {
+    margin: 0.35rem 0 0;
+    padding-left: 1.1rem;
+}
+
+.pesan li {
+    margin-bottom: 0.15rem;
+}
+
+.error-teks {
+    color: var(--bahaya);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+/* ---------- Halaman login ---------- */
+
+.login-bungkus {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.login-kartu {
+    width: 100%;
+    max-width: 380px;
+    background: var(--permukaan);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+}
+
+.login-kartu .merek-besar {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--aksen);
+    margin-bottom: 0.15rem;
+}
+
+.login-kartu .sub {
+    color: var(--teks-redup);
+    font-size: 0.85rem;
+    margin-bottom: 1.4rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--garis);
+}
+
+.login-kartu .tombol {
+    width: 100%;
+    margin-top: 0.35rem;
+}
+
+/* ---------- Detail KRS ---------- */
+
+.identitas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.9rem;
+    font-size: 0.9rem;
+}
+
+.identitas-grid .kunci {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--teks-redup);
+}
+
+.identitas-grid .nilai {
+    font-weight: 600;
+}
+
+/* ---------- Paginasi ---------- */
+
+.paginasi {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: var(--teks-redup);
+}
+
+.paginasi-tautan {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+}
+
+.paginasi-aksi {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--garis-kuat);
+    border-radius: var(--radius);
+    background: var(--permukaan);
+    color: var(--teks);
+    font-size: 0.82rem;
+}
+
+.paginasi-aksi:hover {
+    background: var(--permukaan-redup);
+    text-decoration: none;
+}
+
+.paginasi-aksi.aktif {
+    background: var(--aksen);
+    border-color: var(--aksen);
+    color: #fff;
+    font-weight: 600;
+}
+
+.paginasi-aksi.nonaktif {
+    color: var(--teks-redup);
+    background: var(--permukaan-redup);
+    cursor: not-allowed;
+}
+
+/* ---------- Utilitas ---------- */
+
+.teks-redup { color: var(--teks-redup); }
+.teks-kecil { font-size: 0.85rem; }
+.serif { font-family: var(--serif); }
+.spasi-atas { margin-top: 1.25rem; }
+.rata-kanan { text-align: right; }
+.flex-antar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.baris-form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.baris-form .form-grup {
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 200px;
+}
+
+/* ---------- Responsif ponsel ---------- */
+
+@media (max-width: 720px) {
+    .bar-atas-inner {
+        padding: 0.6rem 1rem;
+        gap: 0.6rem;
+    }
+
+    .merek {
+        width: 100%;
+        margin-right: 0;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid var(--garis);
+    }
+
+    .identitas {
+        border-left: none;
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .navigasi {
+        width: 100%;
+    }
+
+    .wadah {
+        padding: 1.25rem 0.85rem 2.5rem;
+    }
+
+    table.tabel th,
+    table.tabel td {
+        padding: 0.45rem 0.5rem;
+        font-size: 0.84rem;
+    }
+
+    .ringkas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
